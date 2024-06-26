@@ -1,0 +1,16 @@
+syntax = "proto3";
+package energy;
+option go_package = ".;protobuffer";
+
+message Hotdrop {
+  string   DeviceEUI                    = 1;
+  string   Time                         = 2;
+  double   Temp                         = 3;
+  double   InstantaneousCurrent         = 4;
+  double   MaximumCurrent               = 5;
+  double   SecondsAgoForMaximumCurrent  = 6;
+  double   MinimumCurrent               = 7;
+  double   SecondsAgoForMinimumCurrent  = 8;
+  double   AccumulatedCurrent           = 9;
+  double   SupplyVoltage                = 10;
+}

@@ -1,0 +1,22 @@
+{
+  "projectName": "safecility-test",
+  "pubsub": {
+    "topics": {
+      "hotdrop": "test-hotdrop",
+      "bigquery": "test-hotdrop-bigquery"
+    },
+    "subscriptions": {
+      "hotdrop": "test-hotdrop-bigquery-sub",
+      "bigquery": "test-hotdrop-bigquery-sub"
+    }
+  },
+  "bigQuery": {
+    "dataset": "energy",
+    "table": "test-hotdrop",
+    "schema": {
+      "name": "bigquery-hotdrop",
+      "filePath": "./protobuffer/hotdrop.proto"
+    }
+  },
+  "storeAll": false
+}

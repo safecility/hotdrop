@@ -1,0 +1,26 @@
+{
+  "data":[
+    {
+      "devEui":"4A65C99E59283B28",
+      "apiReceivedAt":"2024-01-04T12:08:05.2470719Z",
+      "externalNetworkType":"lora-the-things-stack",
+      "externalNetworkName":"A84041FFFF22C2F4",
+      "externalNetworkReceivedAt":"2024-01-04T12:08:04.9623603Z",
+      "rssi":-48.0,"snr":13.5,"frameCount":145,
+      "sensorMeasurements": [
+        {"type":"accumulatedCurrent_AmpereHour","value":93691.42915472},
+        {"type":"accumulatedCurrent_NanoAmpereHour","value":93691429154720},
+        {"type":"instantaneousCurrent_MilliAmpere","value":20481.494},
+        {"type":"secondsAgoForMaximumCurrent","value":0},
+        {"type":"secondsAgoForMinimumCurrent","value":5},
+        {"type":"maximumCurrent_MilliAmpere","value":21273.629},
+        {"type":"maximumCurrent_Ampere","value":21.27362890625},
+        {"type":"minimumCurrent_Ampere","value":19.900978515625},
+        {"type":"minimumCurrent_MilliAmpere","value":19900.979},
+        {"type":"temperature_Celsius","value":18.75},
+        {"type":"supplyVoltage_Volt","value":5.0},
+        {"type":"resistorIndex","value":"0"}
+      ]
+    }
+  ]
+}

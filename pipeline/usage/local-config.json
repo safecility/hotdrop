@@ -1,0 +1,11 @@
+{
+  "projectName": "safecility-test",
+  "topics": {
+    "eastron": "local-hotdrop-readings",
+    "usage": "local-power-pipeline-usage"
+  },
+  "subscriptions": {
+    "eastron": "local-hotdrop-usage-sub"
+  },
+  "storeAll": true
+}

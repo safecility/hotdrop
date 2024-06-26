@@ -1,0 +1,10 @@
+{
+  "projectName": "safecility-test",
+  "topics": {
+    "hotdrop": "local-hotdrop"
+  },
+  "subscriptions": {
+    "hotdrop": "local-hotdrop-sub"
+  },
+  "storeAll": false
+}
