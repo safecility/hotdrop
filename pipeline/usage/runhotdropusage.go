@@ -39,15 +39,15 @@ func main() {
 	usageTopic := gpsClient.Topic(config.Topics.Usage)
 	exists, err := usageTopic.Exists(ctx)
 	if !exists {
-		log.Fatal().Str("topic", config.Topics.Usage).Msg("no eastron topic found")
+		log.Fatal().Str("topic", config.Topics.Usage).Msg("no hotdrop topic found")
 	}
 
-	eastronSubscription := gpsClient.Subscription(config.Subscriptions.Eastron)
-	exists, err = eastronSubscription.Exists(ctx)
+	hotdropSubscription := gpsClient.Subscription(config.Subscriptions.Hotdrop)
+	exists, err = hotdropSubscription.Exists(ctx)
 	if !exists {
-		log.Fatal().Str("subscription", config.Subscriptions.Eastron).Msg("no eastron subscription")
+		log.Fatal().Str("subscription", config.Subscriptions.Hotdrop).Msg("no hotdrop subscription")
 	}
 
-	eastronServer := server.NewEastronServer(usageTopic, eastronSubscription)
-	eastronServer.Start()
+	hotdropServer := server.NewHotdropServer(usageTopic, hotdropSubscription)
+	hotdropServer.Start()
 }

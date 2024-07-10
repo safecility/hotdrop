@@ -31,11 +31,10 @@ func (es *HotdropServer) receive() {
 	err := es.sub.Receive(context.Background(), func(ctx context.Context, message *pubsub.Message) {
 		r := &messages.HotdropDeviceReading{}
 
-		log.Debug().Str("data", fmt.Sprintf("%s", message.Data)).Msg("raw data")
 		err := json.Unmarshal(message.Data, r)
 		message.Ack()
 		if err != nil {
-			log.Err(err).Msg("could not unmarshall data")
+			log.Error().Err(err).Str("data", fmt.Sprintf("%s", message.Data)).Msg("could not unmarshall data")
 			return
 		}
 

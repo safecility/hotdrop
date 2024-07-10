@@ -1,0 +1,16 @@
+{
+  "projectName": "safecility-test",
+  "store": {
+    "rest": {
+      "host": "https://store-device-xsy3dvec6a-ew.a.run.app"
+    }
+  },
+  "topics": {
+    "uplinks": "test-vu-uplinks",
+    "hotdrop": "test-hotdrop"
+  },
+  "subscriptions": {
+    "uplinks": "test-vu-uplinks-test-sub"
+  },
+  "pipeAll": true
+}

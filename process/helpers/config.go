@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/rs/zerolog/log"
-	"github.com/safecility/go/setup"
 	"os"
 )
 
@@ -12,12 +11,29 @@ const (
 	OSDeploymentKey = "HOTDROP_DEPLOYMENT"
 )
 
+type Firestore struct {
+	Database *string `json:"database"`
+}
+
+type Rest struct {
+	Host string  `json:"host"`
+	Port *string `json:"port"`
+}
+
+func (r Rest) Address() string {
+	if r.Port != nil {
+		return fmt.Sprintf("%s:%d", r.Host, r.Port)
+	}
+	return r.Host
+}
+
 type Config struct {
-	ProjectName string `json:"projectName"`
-	Sql         struct {
-		Config setup.MySQLConfig `json:"config"`
-		Secret setup.Secret      `json:"secret"`
-	} `json:"sql"`
+	ProjectName     string `json:"projectName"`
+	ContextDeadline int    `json:"contextDeadline"`
+	Store           struct {
+		Firestore *Firestore `json:"firestore"`
+		Rest      *Rest      `json:"rest"`
+	}
 	Topics struct {
 		Uplinks string `json:"uplinks"`
 		Hotdrop string `json:"hotdrop"`

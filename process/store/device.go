@@ -6,4 +6,5 @@ import (
 
 type DeviceStore interface {
 	GetDevice(uid string) (*messages.PowerDevice, error)
+	Close() error
 }

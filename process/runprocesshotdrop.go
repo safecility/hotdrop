@@ -2,7 +2,6 @@ package main
 
 import (
 	"cloud.google.com/go/pubsub"
-	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"context"
 	"github.com/rs/zerolog/log"
 	"github.com/safecility/go/setup"
@@ -47,33 +46,18 @@ func main() {
 	}
 	defer hotdropTopic.Stop()
 
-	secretsClient, err := secretmanager.NewClient(ctx)
+	ds, err := helpers.GetStore(config)
 	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to create secrets client")
+		log.Fatal().Err(err).Msg("could not get store")
 	}
-	defer func(secretsClient *secretmanager.Client) {
-		err := secretsClient.Close()
+	defer func(ds store.DeviceStore) {
+		err = ds.Close()
 		if err != nil {
-			log.Error().Err(err).Msg("Failed to close secrets client")
+			log.Error().Err(err).Msg("Failed to close store")
 		}
-	}(secretsClient)
-	sqlSecret := setup.GetNewSecrets(config.ProjectName, secretsClient)
-	password, err := sqlSecret.GetSecret(config.Sql.Secret)
-	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to get secret")
-	}
-	config.Sql.Config.Password = string(password)
+	}(ds)
 
-	s, err := setup.NewSafecilitySql(config.Sql.Config)
-	if err != nil {
-		log.Fatal().Err(err).Msg("could not setup safecility sql")
-	}
-	c, err := store.NewDeviceSql(s)
-	if err != nil {
-		log.Fatal().Err(err).Msg("could not setup safecility device sql")
-	}
-
-	hotDropServer := server.NewHotDropServer(c, uplinksSubscription, hotdropTopic, config.PipeAll)
+	hotDropServer := server.NewHotDropServer(ds, uplinksSubscription, hotdropTopic, config.PipeAll)
 	hotDropServer.Start()
 
 }

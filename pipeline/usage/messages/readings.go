@@ -7,10 +7,14 @@ import (
 	"time"
 )
 
+type PowerProfile struct {
+	PowerFactor float64 `firestore:",omitempty"`
+	Voltage     float64 `firestore:",omitempty"`
+}
+
 type PowerDevice struct {
-	*lib.Device
-	PowerFactor float64 `datastore:",omitempty"`
-	Voltage     float64 `datastore:",omitempty"`
+	lib.Device
+	PowerProfile *PowerProfile `datastore:"-" firestore:",omitempty"`
 }
 
 // HotdropUnits for the slightly weird repetition in different units within the message - the naming of elements is
@@ -41,7 +45,7 @@ type HotdropDeviceReading struct {
 }
 
 type MeterReading struct {
-	*lib.Device
+	lib.Device
 	ReadingKWH float64
 	Time       time.Time
 }
@@ -53,7 +57,14 @@ func (mc HotdropDeviceReading) Usage() (*MeterReading, error) {
 	if mc.AccumulatedCurrent.Milli == 0 {
 		log.Info().Str("reading", fmt.Sprintf("%+v", mc)).Msg("zero usage - check device is new")
 	}
-	kWh := mc.AccumulatedCurrent.Milli * mc.PowerFactor * mc.Voltage / 1000.0
+	if mc.PowerProfile == nil {
+		log.Warn().Str("UID", mc.DeviceUID).Msg("PowerProfile is missing, using defaults")
+		mc.PowerProfile = &PowerProfile{
+			PowerFactor: 1,
+			Voltage:     230,
+		}
+	}
+	kWh := mc.AccumulatedCurrent.Milli * mc.PowerProfile.PowerFactor * mc.PowerProfile.Voltage / 1000.0
 	mr := &MeterReading{
 		Device:     mc.Device,
 		ReadingKWH: kWh,

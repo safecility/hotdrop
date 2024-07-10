@@ -25,7 +25,7 @@ func main() {
 		log.Fatal().Err(err).Msg("Failed to create secrets client")
 	}
 	defer func(secretsClient *secretmanager.Client) {
-		err := secretsClient.Close()
+		err = secretsClient.Close()
 		if err != nil {
 			log.Error().Err(err).Msg("Failed to close secrets client")
 		}
@@ -41,7 +41,7 @@ func main() {
 		log.Fatal().Err(err).Msg("could not get pubsub client")
 	}
 	defer func(psClient *pubsub.Client) {
-		err := psClient.Close()
+		err = psClient.Close()
 		if err != nil {
 			log.Err(err).Msg("Failed to close pubsub client")
 		}
