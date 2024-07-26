@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/rs/zerolog/log"
 	"os"
+	"time"
 )
 
 const (
@@ -22,14 +23,14 @@ type Rest struct {
 
 func (r Rest) Address() string {
 	if r.Port != nil {
-		return fmt.Sprintf("%s:%d", r.Host, r.Port)
+		return fmt.Sprintf("%s:%s", r.Host, *r.Port)
 	}
 	return r.Host
 }
 
 type Config struct {
-	ProjectName     string `json:"projectName"`
-	ContextDeadline int    `json:"contextDeadline"`
+	ProjectName     string        `json:"projectName"`
+	ContextDeadline time.Duration `json:"contextDeadline"`
 	Store           struct {
 		Firestore *Firestore `json:"firestore"`
 		Rest      *Rest      `json:"rest"`

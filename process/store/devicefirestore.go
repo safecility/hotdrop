@@ -13,31 +13,31 @@ type DeviceFirestore struct {
 	contextDeadline time.Duration
 }
 
-func NewDeviceFirestore(client *firestore.Client, deadline int) *DeviceFirestore {
-	return &DeviceFirestore{client: client, contextDeadline: time.Duration(deadline)}
+func NewDeviceFirestore(client *firestore.Client, timeout time.Duration) *DeviceFirestore {
+	return &DeviceFirestore{client: client, contextDeadline: timeout}
 }
 
 func (df DeviceFirestore) GetDevice(uid string) (*messages.PowerDevice, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*df.contextDeadline)
+	ctx, cancel := context.WithTimeout(context.Background(), df.contextDeadline)
 	defer cancel()
 
 	m, err := df.client.Collection("device").Doc(uid).Get(ctx)
 	if err != nil {
 		return nil, err
 	}
-	d := &messages.PowerDevice{
-		Device: lib.Device{
-			DeviceMeta: &lib.DeviceMeta{
-				Listing: &lib.Listing{},
-				Version: &lib.DeviceVersion{},
-			},
+	d := lib.Device{
+		DeviceMeta: &lib.DeviceMeta{
+			Processors: &lib.Processor{},
+			Version:    &lib.DeviceVersion{},
 		},
 	}
-	err = m.DataTo(d)
-	if err != nil {
-		return nil, err
+	pd := &messages.PowerDevice{
+		Device:       d,
+		PowerProfile: &messages.PowerProfile{},
 	}
-	return d, nil
+	err = m.DataTo(pd)
+
+	return pd, err
 }
 
 func (df DeviceFirestore) Close() error {

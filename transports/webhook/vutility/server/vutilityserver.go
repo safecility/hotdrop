@@ -9,7 +9,6 @@ import (
 	"github.com/safecility/iot/devices/transports/webhook/vutility/messages"
 	"io"
 	"net/http"
-	"os"
 )
 
 const bearerPrefix = "Bearer "
@@ -17,25 +16,32 @@ const bearerPrefix = "Bearer "
 type VutilityServer struct {
 	jwtParser *lib.JWTParser
 	uplinks   *pubsub.Topic
+	port      string
 }
 
-func NewVutilityServer(jwtParser *lib.JWTParser, uplinks *pubsub.Topic) VutilityServer {
-	return VutilityServer{jwtParser: jwtParser, uplinks: uplinks}
+func NewVutilityServer(jwtParser *lib.JWTParser, uplinks *pubsub.Topic, port string) VutilityServer {
+	return VutilityServer{jwtParser: jwtParser, uplinks: uplinks, port: port}
 }
 
 // Start listen at the given port for /vutility messages
-func (en *VutilityServer) Start() {
+func (en *VutilityServer) Start() error {
 	handler := http.HandlerFunc(en.handleRequest)
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		_, err := fmt.Fprintf(w, "started")
+		if err != nil {
+			log.Err(err).Msg(fmt.Sprintf("could write to http.ResponseWriter"))
+		}
+	})
+
+	http.HandleFunc("/healthcheck", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(200)
+	})
+
 	http.Handle("/vutility", handler)
 
-	port, e := os.LookupEnv("PORT")
-	if !e {
-		port = "8092"
-	}
-	err := http.ListenAndServe(":"+port, nil)
-	if err != nil {
-		log.Fatal().Msg(fmt.Sprintf("could not start http: %v", err))
-	}
+	log.Info().Msgf("Starting webhook on port %s", en.port)
+	return http.ListenAndServe(":"+en.port, nil)
 }
 
 func (en *VutilityServer) handleAuth(r *http.Request) error {
