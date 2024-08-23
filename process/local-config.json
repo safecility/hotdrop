@@ -2,6 +2,10 @@
   "projectName": "safecility-test",
   "contextDeadline": 10,
   "store": {
+    "rest": {
+      "host": "http://localhost",
+      "port": "8080"
+    },
     "firestore": {
       "database": "static"
     }

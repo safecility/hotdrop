@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"github.com/safecility/iot/devices/hotdrop/process/messages"
+	"net/url"
 )
 
 type DeviceClient struct {
@@ -13,7 +14,6 @@ type DeviceClient struct {
 }
 
 func CreateDeviceClient(serverAddress string) *DeviceClient {
-
 	// Create a Resty Client
 	client := resty.New()
 	return &DeviceClient{
@@ -23,9 +23,10 @@ func CreateDeviceClient(serverAddress string) *DeviceClient {
 }
 
 func (dc *DeviceClient) GetDevice(uid string) (*messages.PowerDevice, error) {
+	safeUID := url.PathEscape(uid)
 	resp, err := dc.client.R().
 		SetHeader("Accept", "application/json").
-		Get(fmt.Sprintf("%s/device/%s", dc.server, uid))
+		Get(fmt.Sprintf("%s/device/%s", dc.server, safeUID))
 
 	if err != nil {
 		return nil, err

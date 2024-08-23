@@ -4,6 +4,7 @@ import (
 	"cloud.google.com/go/pubsub"
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"context"
+	"fmt"
 	"github.com/rs/zerolog/log"
 	"github.com/safecility/go/lib"
 	"github.com/safecility/go/setup"
@@ -55,8 +56,14 @@ func main() {
 	}
 
 	jwtParser := lib.NewJWTParser(string(jwtSecret))
+	port, e := os.LookupEnv("PORT")
+	if !e {
+		port = "8092"
+	}
+	s := server.NewVutilityServer(&jwtParser, uplinksTopic, port)
 
-	s := server.NewVutilityServer(&jwtParser, uplinksTopic)
-
-	s.Start()
+	err = s.Start()
+	if err != nil {
+		log.Fatal().Msg(fmt.Sprintf("could not start http: %v", err))
+	}
 }

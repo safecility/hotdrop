@@ -12,8 +12,8 @@ echo "Deploying"
 
 call go mod vendor
 echo "Mod Vendor"
-call gcloud config set project *****-test
-call gcloud run deploy *your-cloud-run* --source ./  --region "*your-preferred-region*"
+call gcloud config set project safecility-test
+call gcloud run deploy process-hotdrop --source ./ --region "europe-west1"
 
 :exit
 echo "exiting"
