@@ -28,8 +28,8 @@ func (df DeviceFirestore) GetDevice(uid string) (*messages.PowerDevice, error) {
 	d := &messages.PowerDevice{
 		Device: lib.Device{
 			DeviceMeta: &lib.DeviceMeta{
-				Listing: &lib.Listing{},
-				Version: &lib.DeviceVersion{},
+				Version:    &lib.Firmware{},
+				Processors: &lib.Processor{},
 			},
 		},
 	}

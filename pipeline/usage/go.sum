@@ -98,10 +98,10 @@ github.com/redis/go-redis/v9 v9.6.1/go.mod h1:0C0c6ycQsdpVNQpxb1njEQIqkx5UcsM8FJ
 github.com/rs/xid v1.5.0/go.mod h1:trrq9SKmegXys3aeAKXMUTdJsYXVwGY3RLcfgqegfbg=
 github.com/rs/zerolog v1.33.0 h1:1cU2KZkvPxNyfgEmhHAz/1A9Bz+llsdYzklWFzgp0r8=
 github.com/rs/zerolog v1.33.0/go.mod h1:/7mN4D5sKwJLZQ2b/znpjC3/GQWY/xaDXUM0kKWRHss=
-github.com/safecility/go/lib v0.0.0-20240823100128-86b054bcc5e3 h1:7mrPu0AIHnmHFI//qgejUyaA69gTW2/yMr3NKXlgTHU=
-github.com/safecility/go/lib v0.0.0-20240823100128-86b054bcc5e3/go.mod h1:GQvGB6Iu2J32CDmgoTI3jh8LplTN+EpezVwFWgbsuGY=
-github.com/safecility/go/setup v0.0.0-20240823100128-86b054bcc5e3 h1:k5cpkOX+Q/DiuOiLBPewX2RNQjDgVh/8k+kqvP9V8U0=
-github.com/safecility/go/setup v0.0.0-20240823100128-86b054bcc5e3/go.mod h1:PgJZVoAROncpx9cHxuBadQidywC/Xfmy4KuC10j+alo=
+github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a h1:cpZmOuzxo7VTcdIBnDEFUgjNLlOrzJ0wALCOjjZlrWE=
+github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a/go.mod h1:GQvGB6Iu2J32CDmgoTI3jh8LplTN+EpezVwFWgbsuGY=
+github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a h1:cc5zmlDdW39IX0tXgGhnciyWhIYzfqzOGceXWeA0sq4=
+github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a/go.mod h1:PgJZVoAROncpx9cHxuBadQidywC/Xfmy4KuC10j+alo=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

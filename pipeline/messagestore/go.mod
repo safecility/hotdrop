@@ -3,11 +3,11 @@ module github.com/safecility/iot/devices/hotdrop/pipeline/messagestore
 go 1.23
 
 require (
-	cloud.google.com/go/datastore v1.18.1-0.20240822134219-d8887df4a12f
+	cloud.google.com/go/datastore v1.19.0
 	cloud.google.com/go/pubsub v1.42.0
 	github.com/rs/zerolog v1.33.0
-	github.com/safecility/go/lib v0.0.0-20240823100128-86b054bcc5e3
-	github.com/safecility/go/setup v0.0.0-20240823100128-86b054bcc5e3
+	github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a
+	github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a
 )
 
 require (
