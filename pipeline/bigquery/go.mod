@@ -6,8 +6,8 @@ require (
 	cloud.google.com/go/bigquery v1.62.0
 	cloud.google.com/go/pubsub v1.42.0
 	github.com/rs/zerolog v1.33.0
-	github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a
-	github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a
+	github.com/safecility/go/lib v0.0.0-20240904103939-28803fa0c17d
+	github.com/safecility/go/setup v0.0.0-20240904103939-28803fa0c17d
 	google.golang.org/protobuf v1.34.2
 )
 

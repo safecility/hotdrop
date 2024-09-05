@@ -7,8 +7,8 @@ require (
 	cloud.google.com/go/secretmanager v1.14.0
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/rs/zerolog v1.33.0
-	github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a
-	github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a
+	github.com/safecility/go/lib v0.0.0-20240904103939-28803fa0c17d
+	github.com/safecility/go/setup v0.0.0-20240904103939-28803fa0c17d
 )
 
 require (

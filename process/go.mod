@@ -8,8 +8,8 @@ require (
 	github.com/go-resty/resty/v2 v2.14.0
 	github.com/redis/go-redis/v9 v9.6.1
 	github.com/rs/zerolog v1.33.0
-	github.com/safecility/go/lib v0.0.0-20240823132415-582adaaef70a
-	github.com/safecility/go/setup v0.0.0-20240823132415-582adaaef70a
+	github.com/safecility/go/lib v0.0.0-20240904103939-28803fa0c17d
+	github.com/safecility/go/setup v0.0.0-20240904103939-28803fa0c17d
 )
 
 require (

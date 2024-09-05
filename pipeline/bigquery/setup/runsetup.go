@@ -35,7 +35,8 @@ func main() {
 
 	bqc := gbigquery.NewBQTable(client)
 
-	t, err := bqc.CheckOrCreateBigqueryTable(&config.BigQuery)
+	meta := getTableMetadata(config.BigQuery.Table)
+	t, err := bqc.CheckOrCreateBigqueryTable(&config.BigQuery, meta)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to create BigQuery table")
 	}
@@ -111,4 +112,34 @@ func main() {
 	}
 	log.Info().Msg("finished pubsub setup")
 
+}
+
+// string   DeviceEUI                    = 1;
+// string   Time                         = 2;
+// double   Temp                         = 3;
+// double   InstantaneousCurrent         = 4;
+// double   MaximumCurrent               = 5;
+// double   SecondsAgoForMaximumCurrent  = 6;
+// double   MinimumCurrent               = 7;
+// double   SecondsAgoForMinimumCurrent  = 8;
+// double   AccumulatedCurrent           = 9;
+// double   SupplyVoltage                = 10;
+func getTableMetadata(name string) *bigquery.TableMetadata {
+	tableSchema := bigquery.Schema{
+		{Name: "DeviceUID", Type: bigquery.StringFieldType},
+		{Name: "Time", Type: bigquery.TimestampFieldType},
+		{Name: "Temp", Type: bigquery.FloatFieldType},
+		{Name: "InstantaneousCurrent", Type: bigquery.FloatFieldType},
+		{Name: "MaximumCurrent", Type: bigquery.FloatFieldType},
+		{Name: "SecondsAgoForMaximumCurrent", Type: bigquery.FloatFieldType},
+		{Name: "MinimumCurrent", Type: bigquery.FloatFieldType},
+		{Name: "SecondsAgoForMinimumCurrent", Type: bigquery.FloatFieldType},
+		{Name: "AccumulatedCurrent", Type: bigquery.FloatFieldType},
+		{Name: "SupplyVoltage", Type: bigquery.FloatFieldType},
+	}
+
+	return &bigquery.TableMetadata{
+		Name:   name,
+		Schema: tableSchema,
+	}
 }
